@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="favicon.ico" />
+
+    <title>User Registration with Spring Boot</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <link th:href="@{reg/css/style.css}" rel="stylesheet" />
+
+    <style>
+        .full-page-bg {
+            background-image: url('https://source.unsplash.com/random/1920x1080');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            position: relative;
+        }
+
+        .bg-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="full-page-bg">
+        <div class="bg-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                    <div class="middle-box text-center loginscreen animated fadeInDown">
+                        <div class="form-container">
+                            <h4>User Registration</h4>
+                            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post"
+                                class="m-t" role="form" data-toggle="validator">
+
+                                <div th:if="${confirmationMessage}" class="alert alert-success" role="alert"
+                                    th:text="${confirmationMessage}"></div>
+
+                                <div th:if="${alreadyRegisteredMessage}" class="alert alert-danger" role="alert"
+                                    th:text="${alreadyRegisteredMessage}"></div>
+
+                                <div class="form-group">
+                                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                        class="alert alert-danger"></div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        <input type="text" th:field="*{firstName}" placeholder="First Name"
+                                            class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                        class="alert alert-danger"></div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        <input type="text" th:field="*{lastName}" placeholder="Last Name"
+                                            class="form-control" required />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                        class="alert alert-danger"></div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-envelope"></span>
+                                        </span>
+                                        <input type="email" th:field="*{email}" placeholder="Email Address"
+                                            class="form-control" data-error="This email address is invalid" required />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
+                                        class="alert alert-danger"></div>
+                                    <label class="radio-inline">
+                                        <input type="radio" th:field="*{gender}" th:value="Male" /> Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" th:field="*{gender}" th:value="Female" /> Female
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+                            </form>
+
+                            <span>Already have an account? <a class="txt1 bo1 hov1" th:href="@{/showMyLoginPage}">Log-in</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Validator plugin -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+</body>
+
+</html>
